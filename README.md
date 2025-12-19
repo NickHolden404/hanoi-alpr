@@ -34,11 +34,6 @@ mv ~/Downloads/test_video.mp4 data/test_videos/
 python test_basic.py
 ```
 
-### 4. View Results
-
-Check `output/videos/annotated_output.mp4` for annotated video
-Check `output/results/detected_plates.csv` for detections
-
 ## Project Structure
 
 ```
@@ -113,17 +108,9 @@ for det in detections:
 5. 🌐 Build API & dashboard
 6. 📱 Deploy to production
 
-## Contributing
-
-Contributions welcome! Please check the issues page.
-
 ## License
 
 MIT License
-
-## Contact
-
-[Your Name] - [Your Email/LinkedIn]
 
 ## Acknowledgments
 
