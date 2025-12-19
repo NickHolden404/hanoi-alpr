@@ -1,0 +1,56 @@
+# Core Dependencies
+paddleocr>=2.7.0
+paddlepaddle>=2.5.2
+opencv-python>=4.8.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Configuration
+pyyaml>=6.0
+
+# Optional but recommended
+tqdm>=4.65.0  # Progress bars
+Pillow>=10.0.0  # Image handling
+
+# Development (optional)
+pytest>=7.4.0  # Testing
+black>=23.0.0  # Code formatting
+flake8>=6.0.0  # Linting# Core ML/CV Libraries
+ultralytics>=8.0.0         # YOLOv8
+opencv-python>=4.8.0       # Computer vision
+easyocr>=1.7.0            # OCR
+numpy>=1.24.0             # Numerical computing
+Pillow>=10.0.0            # Image processing
+
+# PyTorch (for M1 Mac - MPS support)
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Data processing
+pandas>=2.0.0             # Data manipulation
+matplotlib>=3.7.0         # Plotting
+seaborn>=0.12.0          # Statistical plots
+
+# Video processing
+imageio>=2.31.0
+imageio-ffmpeg>=0.4.8
+
+# API (optional)
+fastapi>=0.100.0
+uvicorn>=0.23.0
+python-multipart>=0.0.6
+
+# Web app (optional)
+streamlit>=1.25.0
+plotly>=5.15.0
+
+# Utilities
+tqdm>=4.65.0             # Progress bars
+python-dotenv>=1.0.0     # Environment variables
+pyyaml>=6.0              # YAML config files
+
+# Development tools
+jupyter>=1.0.0
+ipykernel>=6.25.0
+black>=23.7.0            # Code formatter
+pytest>=7.4.0            # Testing
