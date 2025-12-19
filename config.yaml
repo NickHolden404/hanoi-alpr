@@ -1,0 +1,100 @@
+# Hanoi ALPR Configuration File
+# Edit these parameters to customize processing behavior
+
+# ==============================================================================
+# PROCESSING SETTINGS
+# ==============================================================================
+processing:
+  frame_skip: 5              # Process every Nth frame (1=all frames, 5=every 5th)
+  max_frames: 3000           # Maximum frames to process per video (0=unlimited)
+  confidence_threshold: 0.35 # Minimum OCR confidence (0.0-1.0)
+  duplicate_threshold: 30    # Frames within this range are considered duplicates
+  
+# ==============================================================================
+# OCR SETTINGS
+# ==============================================================================
+ocr:
+  use_gpu: false            # Enable GPU acceleration (set true on RTX 4070)
+  language: 'en'            # OCR language model ('en' works best for alphanumeric)
+  show_log: false           # Show detailed PaddleOCR logs
+  
+  # OCR preprocessing
+  enhance_contrast: true    # Apply contrast enhancement
+  denoise: true            # Apply denoising
+  
+# ==============================================================================
+# PLATE VALIDATION
+# ==============================================================================
+plate_validation:
+  min_plate_length: 7      # Minimum characters in valid plate
+  max_plate_length: 12     # Maximum characters in valid plate
+  
+  # Valid Vietnamese plate formats (regex patterns)
+  formats:
+    - '^\d{2}[A-Z]-\d{3}\.\d{2}$'     # Standard car: 29A-246.53
+    - '^\d{2}[A-Z]{2}-\d{4}$'          # Compact: 20KM-161.20
+    - '^\d{2}[A-Z]-\d{4}$'             # Motorcycle: 29D-1657
+    - '^\d{2}[A-Z]{2}-\d{3}\.\d{2}$'  # Alternative: 22RL-102.20
+  
+  # Characters to clean/normalize
+  char_replacements:
+    'O': '0'  # Letter O -> Zero
+    'I': '1'  # Letter I -> One
+    'Z': '2'  # Letter Z -> Two (if misread)
+    'S': '5'  # Letter S -> Five (if misread)
+    'G': '6'  # Letter G -> Six (if misread)
+    'B': '8'  # Letter B -> Eight (if misread)
+
+# ==============================================================================
+# VIDEO PROCESSING
+# ==============================================================================
+video:
+  valid_extensions:
+    - '.mp4'
+    - '.avi'
+    - '.mov'
+    - '.mkv'
+  
+  video_dir: './videos'      # Directory containing videos to process
+  
+  # Region of interest (where to look for plates)
+  roi:
+    front_percent: 0.4       # Front 40% of vehicle
+    rear_percent: 0.3        # Rear 30% of vehicle
+
+# ==============================================================================
+# OUTPUT SETTINGS
+# ==============================================================================
+output:
+  save_csv: true             # Save results to CSV
+  save_images: false         # Save detected plate images (can use lots of space)
+  save_annotated: false      # Save annotated video frames
+  
+  output_dir: './output/results'
+  image_dir: './output/images'
+  log_dir: './output/logs'
+  
+  # CSV format
+  csv_columns:
+    - 'plate'
+    - 'type'
+    - 'confidence'
+    - 'frame'
+    - 'timestamp'
+
+# ==============================================================================
+# LOGGING
+# ==============================================================================
+logging:
+  level: 'INFO'              # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  console: true              # Log to console
+  file: true                 # Log to file
+  
+# ==============================================================================
+# PERFORMANCE
+# ==============================================================================
+performance:
+  batch_size: 1              # Number of frames to process at once (GPU only)
+  num_workers: 1             # Parallel workers (for batch processing)
+  prefetch_frames: 10        # Number of frames to prefetch
